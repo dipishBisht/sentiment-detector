@@ -7,15 +7,14 @@ export default function JournalForm() {
     const [content, setContent] = useState("");
     const [sentiment, setSentiment] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const userId = "123456";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const response = await axios.post("/api/journal", { userId, content });
-            setSentiment(response.data.entry.sentiment);
+            const response = await axios.post("/api/journal", { content });
+            setSentiment(response.data.sentiment);
         } catch (error) {
             console.error("Error submitting journal:", error);
         }
